@@ -20,6 +20,12 @@ public class BookController {
     private BookDTO selectedBook;
     private String searchKeyword;
 
+    private boolean isCreate;
+
+    private boolean isDelete;
+
+    private int bookId;
+
     @PostConstruct
     public void init() {
         books = bookService.getAllBooks();
@@ -50,6 +56,14 @@ public class BookController {
         selectedBook = bookService.getBookById(bookID);
     }
 
+    public String startCreate() {
+        bookId = 0;
+        // isEdit = false;
+        isCreate = true;
+        selectedBook = new BookDTO();
+        return "createBook.xhtml";
+    }
+
     public void searchBooks() {
         books = bookService.searchKeyword(searchKeyword);
     }
@@ -68,5 +82,21 @@ public class BookController {
 
     public void setSearchKeyword(String searchKeyword) {
         this.searchKeyword = searchKeyword;
+    }
+
+    public BookService getBookService() {
+        return bookService;
+    }
+
+    public void setBookService(BookService bookService) {
+        this.bookService = bookService;
+    }
+
+    public BookDTO getSelectedBook() {
+        return selectedBook;
+    }
+
+    public void setSelectedBook(BookDTO selectedBook) {
+        this.selectedBook = selectedBook;
     }
 }

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+    <title>Create Book</title>
+</h:head>
+
+<h:body>
+    <f:view>
+        <h:form>
+            <table style="width:100%; max-width:600px">
+                <tr>
+                    <td style="width:20%">Title</td>
+                    <td style="color:red;"><h:inputText value="#{bookController.selectedBook.title}" class="inputd"/> </td>
+                </tr>
+                <tr>
+                    <td style="width:20%">Author</td>
+                    <td style="color:red;"><h:inputText value="#{bookController.selectedBook.author}" class="inputd"/> </td>
+                </tr>
+                <tr>
+                    <td style="width:20%">Copies available</td>
+                    <td style="color:red;"><h:inputText value="#{bookController.selectedBook.copiesAvailable}" class="inputd"/> </td>
+                </tr>
+            </table>
+            <br/>
+            <h:commandButton value="Create" action="#{bookController.addBook()}"  class="cbutton"/>
+        </h:form>
+    </f:view>
+</h:body>
+
+</html>
