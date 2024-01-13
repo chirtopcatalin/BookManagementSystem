@@ -1,11 +1,12 @@
 package Repositories;
 
 import Entities.Book;
+import jakarta.annotation.security.DeclareRoles;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
 import java.util.List;
-
+@DeclareRoles({"administrator", "manager", "user"})
 public class BookRepository {
 
     @PersistenceContext

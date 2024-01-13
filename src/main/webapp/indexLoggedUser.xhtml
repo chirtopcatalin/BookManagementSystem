@@ -11,14 +11,15 @@
 <body>
 <div class="navigation-bar">
     <div class="upper-nav-info">
-        Not logged in
+        Logged in as user #{sessionScope.username}
     </div>
     <div class="navigation-wrapper">
         <nav>
             <ul>
-                <li><a href="index.xhtml" class="navigation-link">Books</a></li>
-                <li><a href="login.xhtml" class="navigation-link">Log In</a></li>
-                <li><a href="register.xhtml" class="navigation-link">Sign Up</a></li>
+                <li><a href="indexLoggedUser.xhtml" class="navigation-link">Books</a></li>
+                <li><a class="navigation-link">
+                    <h:form><h:commandButton value="Logout" action="#{accountController.logout}" /></h:form>
+                </a></li>
             </ul>
             <h:form action="searchbook" class="search-form">
                 <h:inputText value="#{bookController.searchKeyword}" class="search-input" />
@@ -28,7 +29,6 @@
     </div>
 </div>
 <div class="content">
-    <div>#{sessionScope.username}, #{sessionScope.type}</div>
     <table>
         <thead>
         <tr>
@@ -36,19 +36,24 @@
             <th>Title</th>
             <th>Author</th>
             <th>Copies Left</th>
+            <th>Actions</th>
         </tr>
         </thead>
-    <tbody>
-    <ui:repeat value="#{bookController.books}" var="book">
-        <tr>
-            <td>#{book.id}</td>
-            <td>#{book.title}</td>
-            <td>#{book.author}</td>
-            <td>#{book.copiesAvailable}</td>
-        </tr>
-    </ui:repeat>
-
-    </tbody>
+        <tbody>
+        <ui:repeat value="#{bookController.books}" var="book">
+            <tr>
+                <td>#{book.id}</td>
+                <td>#{book.title}</td>
+                <td>#{book.author}</td>
+                <td>#{book.copiesAvailable}</td>
+                <td>
+                    <h:form>
+                        <h:commandButton type="submit" value="borrow" action="#{bookBean.selectBookEdit(book.id)}"/>
+                    </h:form>
+                </td>
+            </tr>
+        </ui:repeat>
+        </tbody>
     </table>
 </div>
 </body>

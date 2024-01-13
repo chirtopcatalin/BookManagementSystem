@@ -6,6 +6,7 @@
     <persistence-unit name="library" transaction-type="JTA">
         <jta-data-source>jdbc/library</jta-data-source>
         <class>Entities.Book</class>
+        <class>Entities.Account</class>
 
         <properties>
             <property name="eclipselink.logging.level" value="INFO"/>
