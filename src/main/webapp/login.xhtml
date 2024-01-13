@@ -12,15 +12,15 @@
 <body>
 <div class="register-form-container">
     <h:form>
-        <div class="register-text">Create new account</div>
+        <div class="register-text">Log in</div>
 
-        <h:outputLabel class="register-label" for="email" value="Email" />
-        <h:inputText class="register-input" id="email" value="#{accountBean.email}" />
+        <h:outputLabel class="register-label" for="username" value="Username" />
+        <h:inputText class="register-input" id="username" value="#{accountController.username}" />
 
         <h:outputLabel class="register-label" for="password" value="Password" />
-        <h:inputSecret class="register-input" id="password" value="#{accountBean.password}" />
+        <h:inputSecret class="register-input" id="password" value="#{accountController.password}" />
 
-        <h:commandButton class="register-button" type="submit" value="Log In" />
+        <h:commandButton class="register-button" type="submit" value="Log In" action="#{accountController.login}" />
         <div class="link-to-login"><a href="register.xhtml">Don't have an account?</a></div>
     </h:form>
 </div>

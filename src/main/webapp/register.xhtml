@@ -6,26 +6,23 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <head>
     <meta charset="UTF-8" />
-    <title>Login Page</title>
+    <title>Register Page</title>
     <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 <body>
 <div class="register-form-container">
     <h:form>
         <div class="register-text">Create new account</div>
-        <h:outputLabel class="register-label" for="email" value="Email" />
-        <h:inputText class="register-input" id="email" value="#{accountBean.email}" />
+        <h:outputLabel class="register-label" for="email" value="email" />
+        <h:inputText class="register-input" id="email" value="#{accountController.email}" />
+
+        <h:outputLabel class="register-label" for="username" value="username" />
+        <h:inputText class="register-input" id="username" value="#{accountController.username}" />
 
         <h:outputLabel class="register-label" for="password" value="Password" />
-        <h:inputSecret class="register-input" id="password" value="#{accountBean.password}" />
+        <h:inputSecret class="register-input" id="password" value="#{accountController.password}" />
 
-        <h:outputLabel class="register-label" for="firstName" value="First Name" />
-        <h:inputText class="register-input" id="firstName" value="#{accountBean.firstName}" />
-
-        <h:outputLabel class="register-label" for="lastName" value="Last Name" />
-        <h:inputText class="register-input" id="lastName" value="#{accountBean.lastName}" />
-
-        <h:commandButton class="register-button" type="submit" value="Register" />
+        <h:commandButton class="register-button" type="submit" value="Register" action="accountController.register"/>
         <div class="link-to-login"><a href="login.xhtml">Already have an account?</a></div>
     </h:form>
 </div>
