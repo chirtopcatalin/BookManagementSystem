@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+    <title>Delete Book</title>
+</h:head>
+
+<h:body>
+  <h:form>
+      Are you sure you want to delete Book:
+      <br/>  ID:  #{productsMBean.selected.id}
+      <br/>  Name:  #{productsMBean.selected.name}
+      <br/>  Unit:  #{productsMBean.selected.unit}
+      <br/>  Price:  #{productsMBean.selected.price}
+      <br/>  Quantity:  #{productsMBean.selected.quantity}
+      <br/>  ?
+      <br/>
+      <br/>
+      <h:commandButton value="Delete" action="#{productsMBean.delete}" type="submit" class="cbutton"/>
+      <h:commandButton value="Cancel" action="#{productsMBean.cancel}" type="submit" class="rbutton"/>
+  </h:form>
+</h:body>
+
+</html>
