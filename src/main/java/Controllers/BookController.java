@@ -41,10 +41,17 @@ public class BookController {
         return "/index.xhtml?faces-redirect=true";
     }
 
-    public void updateBook() {
+    public String updateBook() {
         bookService.updateBook(selectedBook);
         books = bookService.getAllBooks();
         selectedBook = null;
+
+        return "/index.xhtml";
+    }
+    public String selectBookEdit(String bookIDparam) {
+        int bookID = Integer.parseInt(bookIDparam);
+        selectedBook = bookService.getBookById(bookID);
+        return "edit.xhtml";
     }
 
 
