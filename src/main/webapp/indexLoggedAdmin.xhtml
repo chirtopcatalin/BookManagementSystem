@@ -53,11 +53,11 @@
                 <td>#{book.copiesAvailable}</td>
                 <td>
                     <h:form>
-                        <h:commandButton type="submit" value="Edit" action="#{bookBean.selectBookEdit(book.id)}"/>
+                        <h:commandButton type="submit" value="Edit" action="#{bookController.selectBookEdit(book.id)}"/>
                     </h:form>
 
                     <h:form>
-                        <h:commandButton type="submit" value="Delete" action="#{bookBean.selectBookDelete(book.id)}"/>
+                        <h:commandButton type="submit" value="Delete" action="#{bookController.deleteBook(book.id)}"/>
                     </h:form>
                 </td>
             </tr>

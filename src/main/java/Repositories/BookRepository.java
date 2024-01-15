@@ -17,7 +17,8 @@ public class BookRepository {
                 .getResultList();
     }
 
-    public Book getProductById(int productId) {return entityManager.find(Book.class, productId);
+    public Book getProductById(int productId) {
+        return entityManager.find(Book.class, productId);
     }
 
     public void addProduct(Book book) {
@@ -27,19 +28,24 @@ public class BookRepository {
     public void updateBook(Book book) {
         entityManager.merge(book);
     }
+
     public List<Book> searchKeyword(String keyword) {
-        if(keyword != "" && keyword != null) {
+        if (keyword != "" && keyword != null) {
             String jpql = "SELECT p FROM Book p WHERE p.title LIKE :keyword";
             return entityManager.createQuery(jpql, Book.class)
                     .setParameter("keyword", "%" + keyword + "%")
                     .getResultList();
-        }
-        else{
+        } else {
             return getAllBooks();
         }
     }
 
-    public void deleteBook(Book book) {
-        entityManager.remove(book);
+    public void deleteBook(int bookId) {
+
+        Book book = entityManager.find(Book.class, bookId);
+        if (book != null) {
+
+            entityManager.remove(book);
+        }
     }
 }

@@ -48,8 +48,8 @@ public class BookController {
     }
 
 
-    public void deleteBook() {
-        bookService.deleteBook(selectedBook);
+    public void deleteBook(int bookId) {
+        bookService.deleteBook(bookId);
         books = bookService.getAllBooks();
     }
 
