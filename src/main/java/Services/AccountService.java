@@ -27,10 +27,9 @@ public class AccountService {
 
 
     @PermitAll
-    public AccountDTO addAccount(AccountDTO accountDTO) {
+    public void addAccount(AccountDTO accountDTO) {
         Account account = convertToEntity(accountDTO);
         accountRepository.addAccount(account);
-        return convertToDTO(account);
     }
 
     @PermitAll
