@@ -34,5 +34,7 @@ public class AccountRepository {
         public void addAccount(Account account) {
         account.setPassword(DigestUtils.sha256Hex(account.getPassword()));
         entityManager.persist(account);
+        String sql = "INSERT INTO grup (username, groupname) VALUES ('"+account.getUsername()+"', 'group3')";
+        entityManager.createNativeQuery(sql).executeUpdate();
         }
     }

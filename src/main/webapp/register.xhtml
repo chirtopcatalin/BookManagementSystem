@@ -22,7 +22,7 @@
         <h:outputLabel class="register-label" for="password" value="Password" />
         <h:inputSecret class="register-input" id="password" value="#{accountController.password}" />
 
-        <h:commandButton class="register-button" type="submit" value="Register" action="accountController.register"/>
+        <h:commandButton class="register-button" type="submit" value="Register" action="#{accountController.register}"/>
         <div class="link-to-login"><a href="login.xhtml">Already have an account?</a></div>
     </h:form>
 </div>
