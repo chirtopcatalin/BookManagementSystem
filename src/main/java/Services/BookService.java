@@ -47,9 +47,9 @@ public class BookService {
         return convertToDTO(books);
     }
 
-    public void deleteBook(BookDTO bookDTO) {
-        Book bookEntity = convertToEntity(bookDTO);
-        bookRepository.deleteBook(bookEntity);
+    public void deleteBook(int bookId) {
+
+        bookRepository.deleteBook(bookId);
     }
 
     @PermitAll
