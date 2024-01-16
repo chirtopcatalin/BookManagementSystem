@@ -33,6 +33,12 @@ public class AccountService {
     }
 
     @PermitAll
+    public List<AccountDTO> getAllUsers(){
+        List<Account> accounts = accountRepository.getAllUsers();
+        return convertToDTO(accounts);
+    }
+
+    @PermitAll
     private AccountDTO convertToDTO(Account account) {
         AccountDTO accountDTO = new AccountDTO();
         accountDTO.setId(account.getId());

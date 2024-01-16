@@ -2,6 +2,7 @@ package Repositories;
 
 import Entities.Book;
 import jakarta.annotation.security.DeclareRoles;
+import jakarta.annotation.security.PermitAll;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
@@ -32,6 +33,7 @@ public class BookRepository {
         entityManager.merge(book);
     }
 
+    @PermitAll
     public List<Book> searchKeyword(String keyword) {
         if (keyword != "" && keyword != null) {
             String jpql = "SELECT p FROM Book p WHERE p.title LIKE :keyword";
@@ -43,6 +45,7 @@ public class BookRepository {
         }
     }
 
+    @PermitAll
     public void deleteBook(int bookId) {
 
         Book book = entityManager.find(Book.class, bookId);
@@ -52,6 +55,7 @@ public class BookRepository {
         }
     }
 
+    @PermitAll
     public String findBookTitleById(int bookId) {
         try {
             return entityManager.createQuery(

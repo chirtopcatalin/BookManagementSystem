@@ -29,13 +29,13 @@ public class BookService {
         Book book = bookRepository.getProductById(bookId);
         return convertToDTO(book);
     }
-
+    @PermitAll
     public void addBook(BookDTO bookDTO) {
         Book book = convertToEntity(bookDTO);
         bookRepository.addProduct(book);
     }
 
-
+    @PermitAll
     public void updateBook(BookDTO bookDTO) {
         Book book = convertToEntity(bookDTO);
         bookRepository.updateBook(book);
@@ -46,7 +46,7 @@ public class BookService {
         List<Book> books = bookRepository.searchKeyword(keyword);
         return convertToDTO(books);
     }
-
+    @PermitAll
     public void deleteBook(int bookId) {
 
         bookRepository.deleteBook(bookId);

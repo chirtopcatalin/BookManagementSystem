@@ -7,6 +7,7 @@
         <jta-data-source>jdbc/library</jta-data-source>
         <class>Entities.Book</class>
         <class>Entities.Account</class>
+        <class>Entities.Borrow</class>
 
         <properties>
             <property name="eclipselink.logging.level" value="INFO"/>

@@ -3,6 +3,7 @@ package Repositories;
 import Entities.Account;
 import Entities.Book;
 import jakarta.annotation.security.DeclareRoles;
+import jakarta.annotation.security.PermitAll;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
@@ -15,6 +16,7 @@ public class AccountRepository {
 
     @PersistenceContext
     private EntityManager entityManager;
+    @PermitAll
     public Account loginUser(String username, String password) {
         if (password == null) {
             return new Account();
@@ -32,21 +34,27 @@ public class AccountRepository {
             return new Account();
         }
     }
+    @PermitAll
         public void addAccount(Account account) {
         account.setPassword(DigestUtils.sha256Hex(account.getPassword()));
         entityManager.persist(account);
         String sql = "INSERT INTO grup (username, groupname) VALUES ('"+account.getUsername()+"', 'group3')";
         entityManager.createNativeQuery(sql).executeUpdate();
         }
-
+    @PermitAll
     public String findUserNameById(int userId) {
         try {
             return entityManager.createQuery(
                             "SELECT u.username FROM Account u WHERE u.id = :userId", String.class)
                     .setParameter("userId", userId)
-                    .getSingleResult();
+                     .getSingleResult();
         } catch (NoResultException e) {
             return null;
         }
+    }
+    @PermitAll
+    public List<Account> getAllUsers(){
+        List<Account> accounts = entityManager.createQuery("SELECT a FROM Account a", Account.class).getResultList();
+        return accounts;
     }
     }

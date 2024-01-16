@@ -11,15 +11,16 @@
 <body>
 <div class="navigation-bar">
     <div class="upper-nav-info">
-        Logged in as user #{sessionScope.username}
+        Logged in as admin #{sessionScope.username}
     </div>
     <div class="navigation-wrapper">
         <nav>
             <ul>
-                <li><a href="indexLoggedUser.xhtml" class="navigation-link">Books</a></li>
-                <li><a href="manageUsers.xhtml" class="navigation-link">Manage users</a></li>
+                <li><a href="indexLoggedAdmin.xhtml" class="navigation-link">Books</a></li>
                 <li><a class="navigation-link">
-                    <h:form><h:commandButton value="My Books" action="#{accountController.logout}" /></h:form>
+                    <h:form>
+                        <h:commandButton type="submit" value="Add book" action="#{bookController.startCreate()}"/>
+                    </h:form>
                 </a></li>
                 <li><a class="navigation-link">
                     <h:form><h:commandButton value="Logout" action="#{accountController.logout}" /></h:form>
@@ -44,21 +45,29 @@
         </tr>
         </thead>
         <tbody>
-        <ui:repeat value="#{bookController.books}" var="book">
+        <ui:repeat value="#{accountController.accounts}" var="account">
             <tr>
-                <td>#{book.id}</td>
-                <td>#{book.title}</td>
-                <td>#{book.author}</td>
-                <td>#{book.copiesAvailable}</td>
+                <td>#{account.id}</td>
+                <td>#{account.username}</td>
+                <td>#{account.password}</td>
+                <td>#{account.type}</td>
                 <td>
                     <h:form>
-                        <h:commandButton type="submit" value="borrow" action="#{borrowController.borrowBook(sessionScope.id, book.id)}"/>
+                        <h:commandButton type="submit" value="Edit" action="#{bookController.selectBookEdit(book.id)}"/>
                     </h:form>
+
+                    <h:form>
+                        <h:commandButton type="submit" value="Delete" action="#{bookController.deleteBook(book.id)}"/>
+                    </h:form>
+
                 </td>
             </tr>
         </ui:repeat>
         </tbody>
     </table>
+    <h:form>
+        <h:commandButton value="View Borrows" action="#{borrowController.navigateToBorrowsPage}" styleClass="view-borrows-button" />
+    </h:form>
 </div>
 </body>
 </html>
