@@ -1,0 +1,73 @@
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<head>
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+<body>
+<div class="navigation-bar">
+    <div class="upper-nav-info">
+        Logged in as admin #{sessionScope.username}
+    </div>
+    <div class="navigation-wrapper">
+        <nav>
+            <ul>
+                <li><a href="indexLoggedAdmin.xhtml" class="navigation-link">Books</a></li>
+                <li><a class="navigation-link">
+                    <h:form>
+                        <h:commandButton type="submit" value="Add book" action="#{bookController.startCreate()}"/>
+                    </h:form>
+                </a></li>
+                <li><a class="navigation-link">
+                    <h:form><h:commandButton value="Logout" action="#{accountController.logout}" /></h:form>
+                </a></li>
+            </ul>
+            <h:form action="searchbook" class="search-form">
+                <h:inputText value="#{bookController.searchKeyword}" class="search-input" />
+                <h:commandButton value="Search" action="#{bookController.searchBooks}" class="search-button" />
+            </h:form>
+        </nav>
+    </div>
+</div>
+<div class="content">
+    <table>
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Username</th>
+            <th>Password</th>
+            <th>Type</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <ui:repeat value="#{accountController.accounts}" var="account">
+            <tr>
+                <td>#{account.id}</td>
+                <td>#{account.username}</td>
+                <td>#{account.password}</td>
+                <td>#{account.type}</td>
+                <td>
+                    <h:form>
+                        <h:commandButton type="submit" value="Edit" action="#{bookController.selectBookEdit(book.id)}"/>
+                    </h:form>
+
+                    <h:form>
+                        <h:commandButton type="submit" value="Delete" action="#{bookController.deleteBook(book.id)}"/>
+                    </h:form>
+
+                </td>
+            </tr>
+        </ui:repeat>
+        </tbody>
+    </table>
+    <h:form>
+        <h:commandButton value="View Borrows" action="#{borrowController.navigateToBorrowsPage}" styleClass="view-borrows-button" />
+    </h:form>
+</div>
+</body>
+</html>

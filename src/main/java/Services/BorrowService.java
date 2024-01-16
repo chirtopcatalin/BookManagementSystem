@@ -50,11 +50,12 @@ public BorrowDTO getBorrowById(int borrowId) {
 }
 
 
-
+    @PermitAll
 public void deleteBorrow(BorrowDTO borrowDTO) {
     Borrow borrow = convertToEntity(borrowDTO);
     borrowRepository.deleteBorrow(borrow);
 }
+    @PermitAll
 
 private BorrowDTO convertToDTO(Borrow borrow) {
     BorrowDTO borrowDTO = new BorrowDTO();
@@ -64,6 +65,7 @@ private BorrowDTO convertToDTO(Borrow borrow) {
     borrowDTO.setBookId(borrow.getBookId());
     return borrowDTO;
 }
+    @PermitAll
 
     public void borrowBook(int userId, int bookId) {
         Borrow borrow = new Borrow();
@@ -72,6 +74,7 @@ private BorrowDTO convertToDTO(Borrow borrow) {
 
         borrowRepository.createBorrow(borrow);
     }
+    @PermitAll
 
 private Borrow convertToEntity(BorrowDTO borrowDTO) {
     Borrow borrow = new Borrow();

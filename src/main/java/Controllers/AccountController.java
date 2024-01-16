@@ -1,8 +1,11 @@
 package Controllers;
 import DTO.AccountDTO;
+import DTO.BookDTO;
 import Services.AccountService;
 import Services.BookService;
+import jakarta.annotation.PostConstruct;
 import jakarta.annotation.security.DeclareRoles;
+import jakarta.annotation.security.PermitAll;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.application.FacesMessage;
@@ -14,6 +17,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Named
 @RequestScoped
@@ -21,6 +26,7 @@ public class AccountController implements Serializable {
 
     @Inject
     private AccountService accountService;
+    private List<AccountDTO> accounts = new ArrayList<>();
     private static final long serialVersionUID = 1L;
     private String username;
     private String password;
@@ -48,11 +54,21 @@ public class AccountController implements Serializable {
         }
     }
 
+    @PostConstruct
+    public void init(){
+        getAllUsers();
+    }
+    @PermitAll
+    public void getAllUsers(){
+        accounts = accountService.getAllUsers();
+    }
+    @PermitAll
     public String register() throws IOException {
         AccountDTO account = new AccountDTO(username,email,0,"user", password);
         accountService.addAccount(account);
         return "index.xhtml";
     }
+    @PermitAll
     public void logout() throws IOException {
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
         externalContext.invalidateSession();
@@ -83,5 +99,13 @@ public class AccountController implements Serializable {
 
     public String getEmail(){
         return email;
+    }
+
+    public List<AccountDTO> getAccounts() {
+        return accounts;
+    }
+
+    public void setAccounts(List<AccountDTO> accounts) {
+        this.accounts = accounts;
     }
 }
