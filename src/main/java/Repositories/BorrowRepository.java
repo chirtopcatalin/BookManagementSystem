@@ -48,6 +48,22 @@ public class BorrowRepository {
     }
     @PermitAll
     public void createBorrow(Borrow borrow) {
-        entityManager.persist(borrow);
+        //check if user already borrowed the book
+        if (entityManager.createQuery("SELECT b FROM Borrow b WHERE b.userId = :userId AND b.bookId = :bookId", Borrow.class)
+                .setParameter("userId", borrow.getUserId())
+                .setParameter("bookId", borrow.getBookId())
+                .getResultList().size() > 0) {
+            return;
+        }
+
+        //check if book is available
+        if (entityManager.createQuery("SELECT b FROM Book b WHERE b.id = :bookId AND b.copiesAvailable > 0", Borrow.class)
+                .setParameter("bookId", borrow.getBookId())
+                .getResultList().size() > 0) {
+            entityManager.createQuery("UPDATE Book b SET b.copiesAvailable = b.copiesAvailable - 1 WHERE b.id = :bookId")
+                    .setParameter("bookId", borrow.getBookId())
+                    .executeUpdate();
+            entityManager.persist(borrow);
+        }
     }
 }

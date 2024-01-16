@@ -27,6 +27,7 @@ public class BookController {
     private boolean isDelete;
 
     private int bookId;
+    private List<BookDTO> borrowedBooks;
 
     @PostConstruct
     public void init() {
@@ -73,6 +74,12 @@ public class BookController {
         return "createBook.xhtml";
     }
 
+    public String getUserBorrowedBooks() {
+        int userID = (int) jakarta.faces.context.FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("userid");
+        borrowedBooks = bookService.getBorrowedBooks(userID);
+        return "myBorrowedBooks.xhtml";
+    }
+
     public void searchBooks() {
         books = bookService.searchKeyword(searchKeyword);
     }
@@ -107,5 +114,13 @@ public class BookController {
 
     public void setSelectedBook(BookDTO selectedBook) {
         this.selectedBook = selectedBook;
+    }
+
+    public void setBorrowedBooks(List<BookDTO> borrowedBooks) {
+        this.borrowedBooks = borrowedBooks;
+    }
+
+    public List<BookDTO> getBorrowedBooks() {
+        return borrowedBooks;
     }
 }

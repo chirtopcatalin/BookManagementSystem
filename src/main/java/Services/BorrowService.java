@@ -66,12 +66,8 @@ private BorrowDTO convertToDTO(Borrow borrow) {
     return borrowDTO;
 }
     @PermitAll
-
-    public void borrowBook(int userId, int bookId) {
-        Borrow borrow = new Borrow();
-        borrow.setUserId(userId);
-        borrow.setBookId(bookId);
-
+    public void borrowBook(BorrowDTO borrowDTO) {
+         Borrow borrow = convertToEntity(borrowDTO);
         borrowRepository.createBorrow(borrow);
     }
     @PermitAll

@@ -42,6 +42,7 @@ public class AccountController implements Serializable {
             return "error.xhtml";
         }
         AccountDTO account = accountService.loginUser(username, password);
+        externalContext.getSessionMap().put("userid", account.getId());
         externalContext.getSessionMap().put("username", account.getUsername());
         externalContext.getSessionMap().put("type", account.getType());
         String accountType = account.getType();

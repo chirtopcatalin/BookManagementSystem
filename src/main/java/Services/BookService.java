@@ -41,6 +41,13 @@ public class BookService {
         bookRepository.updateBook(book);
     }
 
+    public List<BookDTO> getBorrowedBooks(int userID) {
+        return bookRepository.getBorrowedBooks(userID)
+                .stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
     @PermitAll
     public List<BookDTO> searchKeyword(String keyword) {
         List<Book> books = bookRepository.searchKeyword(keyword);

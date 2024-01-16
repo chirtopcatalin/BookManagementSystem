@@ -17,8 +17,7 @@
         <nav>
             <ul>
                 <li><a href="indexLoggedUser.xhtml" class="navigation-link">Books</a></li>
-                <li><a class="navigation-link">
-                    <h:form><h:commandButton value="My Books" action="#{bookController.getUserBorrowedBooks}"/></h:form>
+                <li><a class="navigation-link" href="#">
                 </a></li>
                 <li><a class="navigation-link">
                     <h:form><h:commandButton value="Logout" action="#{accountController.logout}" /></h:form>
@@ -38,22 +37,14 @@
             <th>Id</th>
             <th>Title</th>
             <th>Author</th>
-            <th>Copies Left</th>
-            <th>Actions</th>
         </tr>
         </thead>
         <tbody>
-        <ui:repeat value="#{bookController.books}" var="book">
+        <ui:repeat value="#{bookController.borrowedBooks}" var="book">
             <tr>
                 <td>#{book.id}</td>
                 <td>#{book.title}</td>
                 <td>#{book.author}</td>
-                <td>#{book.copiesAvailable}</td>
-                <td>
-                    <h:form>
-                        <h:commandButton type="submit" value="Borrow" action="#{borrowController.borrowBook(book.id)}"/>
-                    </h:form>
-                </td>
             </tr>
         </ui:repeat>
         </tbody>

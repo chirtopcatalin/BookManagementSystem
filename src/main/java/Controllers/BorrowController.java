@@ -2,6 +2,7 @@ package Controllers;
 
 
 
+import DTO.BookDTO;
 import DTO.BorrowDTO;
 import Services.BorrowService;
 import jakarta.annotation.PostConstruct;
@@ -19,6 +20,7 @@ public class BorrowController {
 
     private List<BorrowDTO> borrows;
 
+
     @PostConstruct
     public void init() {
         borrows = borrowService.getAllBorrows();
@@ -31,5 +33,15 @@ public class BorrowController {
     public String navigateToBorrowsPage() {
         return "borrowsList.xhtml";
     }
+
+    public String borrowBook(int bookId) {
+        int userID = (int) jakarta.faces.context.FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("userid");
+        BorrowDTO borrow = new BorrowDTO();
+        borrow.setBookId(bookId);
+        borrow.setUserId(userID);
+        borrowService.borrowBook(borrow);
+        return "indexLoggedUser.xhtml?faces-redirect=true";
+    }
+
 }
 

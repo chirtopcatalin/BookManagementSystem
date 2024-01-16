@@ -1,5 +1,6 @@
 package Repositories;
 
+import DTO.BookDTO;
 import Entities.Book;
 import jakarta.annotation.security.DeclareRoles;
 import jakarta.annotation.security.PermitAll;
@@ -55,6 +56,11 @@ public class BookRepository {
         }
     }
 
+    public List<Book> getBorrowedBooks(int userId) {
+        return entityManager.createQuery("SELECT b FROM Book b WHERE b.id IN (SELECT b.bookId FROM Borrow b WHERE b.userId = :userId)", Book.class)
+                .setParameter("userId", userId)
+                .getResultList();
+    }
     @PermitAll
     public String findBookTitleById(int bookId) {
         try {
