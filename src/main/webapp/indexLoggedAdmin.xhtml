@@ -59,11 +59,15 @@
                     <h:form>
                         <h:commandButton type="submit" value="Delete" action="#{bookController.deleteBook(book.id)}"/>
                     </h:form>
+
                 </td>
             </tr>
         </ui:repeat>
         </tbody>
     </table>
+    <h:form>
+        <h:commandButton value="View Borrows" action="#{borrowController.navigateToBorrowsPage}" styleClass="view-borrows-button" />
+    </h:form>
 </div>
 </body>
 </html>

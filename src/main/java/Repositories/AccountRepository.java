@@ -4,6 +4,7 @@ import Entities.Account;
 import Entities.Book;
 import jakarta.annotation.security.DeclareRoles;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -37,4 +38,15 @@ public class AccountRepository {
         String sql = "INSERT INTO grup (username, groupname) VALUES ('"+account.getUsername()+"', 'group3')";
         entityManager.createNativeQuery(sql).executeUpdate();
         }
+
+    public String findUserNameById(int userId) {
+        try {
+            return entityManager.createQuery(
+                            "SELECT u.username FROM Account u WHERE u.id = :userId", String.class)
+                    .setParameter("userId", userId)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
     }

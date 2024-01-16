@@ -1,11 +1,11 @@
 package Entities;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Column;
 
+import jakarta.persistence.*;
+
+
+
+@Table(name = "borrow")
 @Entity
 public class Borrow {
     @Id

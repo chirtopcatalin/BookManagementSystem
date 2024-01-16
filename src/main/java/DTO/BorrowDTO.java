@@ -5,18 +5,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Column;
 
-@Entity
+
 public class BorrowDTO {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "borrow_id")
+
     private int borrowId;
-
-    @Column(name = "user_id")
     private int userId;
-
-    @Column(name = "book_id")
     private int bookId;
+
+    private String userName; // Numele utilizatorului
+    private String bookTitle; // Titlul cărții
 
 
     public BorrowDTO() {
@@ -26,6 +23,9 @@ public class BorrowDTO {
     public BorrowDTO(int userId, int bookId) {
         this.userId = userId;
         this.bookId = bookId;
+    }
+
+    public BorrowDTO(int borrowId, int userId, int bookId, String userName, String bookTitle) {
     }
 
 
@@ -53,4 +53,19 @@ public class BorrowDTO {
         this.bookId = bookId;
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getBookTitle() {
+        return bookTitle;
+    }
+
+    public void setBookTitle(String bookTitle) {
+        this.bookTitle = bookTitle;
+    }
 }

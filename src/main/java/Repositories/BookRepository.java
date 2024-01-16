@@ -2,10 +2,13 @@ package Repositories;
 
 import Entities.Book;
 import jakarta.annotation.security.DeclareRoles;
+import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
 
 import java.util.List;
+@Stateless
 @DeclareRoles({"administrator", "manager", "user"})
 public class BookRepository {
 
@@ -46,6 +49,17 @@ public class BookRepository {
         if (book != null) {
 
             entityManager.remove(book);
+        }
+    }
+
+    public String findBookTitleById(int bookId) {
+        try {
+            return entityManager.createQuery(
+                            "SELECT b.title FROM Book b WHERE b.id = :bookId", String.class)
+                    .setParameter("bookId", bookId)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            return null; // sau gestionează cum consideri necesar
         }
     }
 }

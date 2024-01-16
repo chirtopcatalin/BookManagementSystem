@@ -51,7 +51,7 @@
                 <td>#{book.copiesAvailable}</td>
                 <td>
                     <h:form>
-                        <h:commandButton type="submit" value="borrow" action="#{bookBean.selectBookEdit(book.id)}"/>
+                        <h:commandButton type="submit" value="borrow" action="#{borrowController.borrowBook(sessionScope.id, book.id)}"/>
                     </h:form>
                 </td>
             </tr>

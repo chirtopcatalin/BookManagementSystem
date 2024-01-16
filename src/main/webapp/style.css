@@ -123,4 +123,15 @@ li {
     margin-top: 20px; /* Adjust the margin as needed */
 }
 
-h:command
+.view-borrows-button {
+    display: inline-block;
+    width: 200px;
+    height: 55px;
+    border-radius: 30px;
+    background: #457294;
+    color: white;
+    font-size: 20px;
+    margin-top: 20px;
+    border: none;
+    cursor: pointer;
+}
